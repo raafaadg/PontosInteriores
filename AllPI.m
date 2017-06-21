@@ -2,6 +2,7 @@ clear;
 clc;
 format long
 vars = {'Z1' 'Z2' 'Z3' 'Z4' 'Z5' 'Z6' 'Z7' 'Z8' 'Precisao'};
+data='data.xlsx';
 % x0=[1 2;2 1;1 3;3 1;2 3;3 2];
 % a=[.75 .9 .7 .85 .6 .8];
 x0=[1 2;2 1];
@@ -16,6 +17,7 @@ XX=[];
 ZZ=[];
 EE=[];
 cont = 1;
+sheet=1;
 for k=1:size(x0,1)
     for i=1:size(a,2)
         msg=sprintf('Ponto Inicial x0: [%d,%d] e Alfa: %.2f',...
@@ -29,7 +31,8 @@ for k=1:size(x0,1)
          fill([0 0 2 4 4],[0 6 6 3 0],[.5 .7 .8])
          hold on;
          
-        [Z X E] = PontosInteriores(x0(k,:),a(i),cont);
+        [Z X E] = PontosInteriores(x0(k,:),a(i),cont,data,sheet);
+        sheet=sheet+1;
         cont = 1;
         XS=[x0(k,1) X(:,1)'];
         YS=[x0(k,2) X(:,2)'];
